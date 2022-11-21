@@ -3,14 +3,14 @@ import math
 from tkinter import messagebox
 
 
-def add_digit(digit):#Ввод цифр
+def add_digit(digit):
     value = calc.get()
     if value[0] == '0' and len(value)==1:
         value = value[1:]
     calc.delete(0, tk.END)
     calc.insert(0, value+digit)
 
-def add_operation(operation):#Ввод знаков
+def add_operation(operation):
     value = calc.get()
     if value[-1] in "-=/*":
         value = value[:-1]
@@ -20,14 +20,14 @@ def add_operation(operation):#Ввод знаков
     calc.delete(0, tk.END)
     calc.insert(0, value + operation)
 
-def add_point(operation):#Ввод точки
+def add_point(operation):
     value = calc.get()
     if value[-1] in "-=/*":
           value = value[:-1]
     calc.delete(0, tk.END)
     calc.insert(0, value + operation)
 
-def calculate():#Выполнить дейстие + обработка ошибок
+def calculate():
     value = calc.get()
     if value[-1] in "-=/*":
         value = value + value[:-1]
@@ -37,28 +37,28 @@ def calculate():#Выполнить дейстие + обработка ошиб
         k = '{:g}'.format(k)
         calc.insert(0, k)
     except (NameError, SyntaxError):
-        messagebox.showinfo('Нужно ввести цифры')
+        messagebox.showinfo('Need to enter numbers)
         calc.insert(0, 0)
     except ZeroDivisionError:
-        messagebox.showinfo('Нельзя делить на ноль')
+        messagebox.showinfo('Can not divide by zero')
         calc.insert(0, 0)
 
-def calculatesqrt():#Корень
+def calculatesqrt():
     value = calc.get()
     if value[-1] in "-=/*":
         value = value + value[:-1]
     elif '+' in value or '-' in value or '*' in value or '/' in value :
         calculate()
         value = calc.get()
-    koren = int(value)
+    sqrt = int(value)
     calc.delete(0, tk.END)
-    k = math.sqrt(koren)
+    k = math.sqrt(sqrt)
     k = '{:g}'.format(k)
     calc.insert(0, k)
       
     
 
-def calculateprocent():#Процент
+def calculateprocent():
     value = calc.get()
     if value[-1] in "-=/*":
         value = value + value[:-1]
@@ -71,12 +71,12 @@ def calculateprocent():#Процент
     i = '{:g}'.format(i)
     calc.insert(0, i)
 
-def clear():#Очистить поле ввода
+def clear():
     calc.delete(0, tk.END)
     calc.insert(0, 0)
     
 
-#Функции создания кнопок
+
 def make_digit_buttom(digit):
     return tk.Button(text=digit, bd=5, command=lambda: add_digit(digit))
 
@@ -118,7 +118,7 @@ def presskey(event):#Обработка ввода с клавиатуры
 
 win = tk.Tk()
 win.geometry("300x260")
-win.title("Калькулятор")
+win.title("Calculator")
 win.focus_force()
 calc = tk.Entry(win, justify=tk.RIGHT, font=(15), width=15)
 calc.insert(0,'0')
